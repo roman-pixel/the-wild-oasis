@@ -1,7 +1,22 @@
 import supabase from "./supabase";
 
-export async function getCabins() {
-  const { data, error } = await supabase.from("cabins").select("*");
+export async function getCabins({ filter, sortBy }) {
+  let query = supabase
+    .from("cabins")
+    .select(
+      "id, created_at, name, maxCapacity, regularPrice, discount,description, image"
+    );
+
+  // FILTER
+  if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
+
+  // SORT
+  if (sortBy)
+    query = query.order(sortBy.field, {
+      ascending: sortBy.direction === "asc",
+    });
+
+  const { data, error } = await query;
 
   if (error) {
     console.error(error);
