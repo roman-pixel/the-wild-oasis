@@ -14,11 +14,11 @@ function UpdateSettingsForm() {
       maxGuestsPerBooking,
       breakfastPrice,
     } = {},
-    isLoading,
+    isPending,
   } = useSettings();
   const { isUpdating, updateSetting } = useUpdateSettings();
 
-  if (isLoading) return <Spinner />;
+  if (isPending) return <Spinner />;
 
   function handleBlur(e, field) {
     const { value } = e.target;
