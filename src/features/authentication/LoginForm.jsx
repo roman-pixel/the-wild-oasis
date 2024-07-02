@@ -7,7 +7,6 @@ import FormRowVertical from "../../ui/FormRowVertical";
 import SpinnerMini from "../../ui/SpinnerMini";
 
 import { useLogin } from "./useLogin";
-import CabinTable from "../cabins/CabinTable";
 
 function LoginForm() {
   // temp
@@ -59,8 +58,6 @@ function LoginForm() {
           {!isPending ? "Login" : <SpinnerMini />}
         </Button>
       </FormRowVertical>
-
-      <CabinTable />
     </Form>
   );
 }
