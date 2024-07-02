@@ -82,7 +82,9 @@ function SignupForm() {
         <Button $variation="secondary" type="reset" disabled={isPending}>
           Cancel
         </Button>
-        <Button>{!isPending ? "Create new user" : <SpinnerMini />}</Button>
+        <Button disabled={isPending}>
+          {!isPending ? "Create new user" : <SpinnerMini />}
+        </Button>
       </FormRow>
     </Form>
   );
