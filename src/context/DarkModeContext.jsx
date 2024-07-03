@@ -1,13 +1,10 @@
 import { createContext, useContext, useEffect } from "react";
-import { useLocalStorageState } from "../hooks/useLocalStorageState";
+import { useThemeDetector } from "../hooks/useThemeDetector";
 
 const DarkModeContext = createContext();
 
 function DarkModeProvider({ children }) {
-  const [isDarkMode, setIsDarkMode] = useLocalStorageState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches,
-    "isDarkMode"
-  );
+  const { isDarkMode, setIsDarkMode } = useThemeDetector();
 
   useEffect(() => {
     if (isDarkMode) {
