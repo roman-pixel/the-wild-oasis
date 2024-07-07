@@ -6,7 +6,6 @@ const sizes = {
     padding: 0.4rem 0.8rem;
     text-transform: uppercase;
     font-weight: 600;
-    text-align: center;
   `,
   medium: css`
     font-size: 1.4rem;
@@ -46,12 +45,22 @@ const variations = {
       background-color: var(--color-red-800);
     }
   `,
+  inline: css`
+    color: var(--color-grey-600);
+    background-color: var(--color-grey-0);
+    box-shadow: none;
+
+    &:hover {
+      background-color: var(--color-grey-200);
+    }
+  `,
 };
 
 export const Button = styled.button`
   border: none;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
+  text-align: ${(props) => props.$textAlign || "center"};
 
   ${(props) => sizes[props.size]}
   ${(props) => variations[props.$variation]}
@@ -60,6 +69,7 @@ export const Button = styled.button`
 Button.defaultProps = {
   $variation: "primary",
   size: "medium",
+  $textAlign: "center",
 };
 
 export default Button;

@@ -16,8 +16,10 @@ import AppLayout from "./ui/AppLayout";
 import Booking from "./pages/Booking";
 import Checkedin from "./pages/Checkedin";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import Recovery from "./pages/Recovery";
 
 import { DarkModeProvider } from "./context/DarkModeContext";
+import PasswordReset from "./pages/PasswordReset";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +49,8 @@ function App() {
             </Route>
 
             <Route path="login" element={<Login />} />
+            <Route path="login/recovery" element={<Recovery />} />
+            <Route path="reset-password" element={<PasswordReset />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

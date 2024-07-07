@@ -7,24 +7,22 @@ import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
 import SpinnerMini from "../../ui/SpinnerMini";
 
-import { useLogin } from "./useLogin";
+import { useRecovery } from "./useRecovery";
 
-function LoginForm() {
+function RecoveryForm() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const { login, isPending } = useLogin();
+  const { recovery, isPending } = useRecovery();
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!email || !password) return;
-    login(
-      { email, password },
+    if (!email) return;
+    recovery(
+      { email },
       {
         onSettled: () => {
           setEmail("");
-          setPassword("");
         },
       }
     );
@@ -43,30 +41,18 @@ function LoginForm() {
           disabled={isPending}
         />
       </FormRowVertical>
-      <FormRowVertical label="Password">
-        <Input
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          disabled={isPending}
-        />
-      </FormRowVertical>
       <FormRowVertical>
         <Button size="large" disabled={isPending}>
-          {!isPending ? "Login" : <SpinnerMini />}
+          {!isPending ? "Reset password" : <SpinnerMini />}
         </Button>
       </FormRowVertical>
       <FormRowVertical>
-        {!isPending && (
-          <Button size="medium" $variation="inline" as={Link} to={"recovery"}>
-            Forgot your password?
-          </Button>
-        )}
+        <Button size="medium" $variation="inline" as={Link} to="/login">
+          &larr; Go back
+        </Button>
       </FormRowVertical>
     </Form>
   );
 }
 
-export default LoginForm;
+export default RecoveryForm;
