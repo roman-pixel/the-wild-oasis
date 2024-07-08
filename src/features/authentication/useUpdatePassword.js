@@ -1,19 +1,22 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 import { updatePassword as updatePasswordApi } from "../../services/apiAuth";
 
 export function useUpdatePassword() {
-  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { mutate: updatePassword, isPending: isUpdating } = useMutation({
     mutationFn: updatePasswordApi,
-    onSuccess: ({ user }) => {
+    onSuccess: () => {
       toast.success("User password successfully updated");
-      queryClient.setQueriesData("user", user);
-      // queryClient.invalidateQueries({ queryKey: ["user"] });
+      navigate("/dashboard", { replace: true });
     },
-    onError: (err) => toast.error(err.message),
+    onError: (err) => {
+      toast.error(err.message);
+      console.error(err.message);
+    },
   });
 
   return { isUpdating, updatePassword };

@@ -15,7 +15,10 @@ export function useDeleteBooking() {
         queryKey: ["bookings"],
       });
     },
-    onError: (err) => toast.error(err.message),
+    onError: (err) => {
+      toast.error(err.message);
+      console.error(err.message);
+    },
   });
 
   return { isDeleting, deleteBooking };

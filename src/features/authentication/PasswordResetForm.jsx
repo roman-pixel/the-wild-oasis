@@ -11,32 +11,31 @@ import Spinner from "../../ui/Spinner";
 
 import { useValidToken } from "./useValidToken";
 import { useUpdatePassword } from "./useUpdatePassword";
+import { useEffect } from "react";
 
 function PasswordResetForm() {
   const navigate = useNavigate();
-  const { register, formState, getValues, handleSubmit, reset } = useForm();
+  const { register, formState, getValues, handleSubmit } = useForm();
   const { errors } = formState;
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token_hash");
-  const { updatePassword, isUpdating } = useUpdatePassword();
 
+  const { updatePassword, isUpdating } = useUpdatePassword();
   const { isTokenValidLoading, isTokenValidError, tokenValidError } =
     useValidToken(token);
 
+  useEffect(() => {
+    if (isTokenValidError) {
+      navigate("/login", { replace: true });
+      console.error(tokenValidError.message);
+      toast.error(tokenValidError.message);
+    }
+  }, [isTokenValidError, tokenValidError, navigate]);
+
   if (isTokenValidLoading) return <Spinner />;
-  if (isTokenValidError) {
-    console.error(tokenValidError.message);
-    toast.error(tokenValidError.message);
-    navigate("/login");
-  }
 
   function onSubmit({ password }) {
-    updatePassword(
-      { password },
-      {
-        onSettled: reset,
-      }
-    );
+    updatePassword({ password });
   }
 
   return (

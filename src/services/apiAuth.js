@@ -64,12 +64,7 @@ export async function logout() {
 }
 
 export async function updatePassword({ password }) {
-  // 1. Update password OR fullName
-  let updateData;
-
-  if (password) updateData = { password };
-
-  const { data, error } = await supabase.auth.updateUser(updateData);
+  const { data, error } = await supabase.auth.updateUser({ password });
 
   if (error) throw new Error(error.message);
 
