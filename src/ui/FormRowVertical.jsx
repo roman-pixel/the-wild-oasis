@@ -1,10 +1,17 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledFormRow = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   padding: 1.2rem 0;
+
+  ${(props) =>
+    props.type === "center" &&
+    css`
+      align-items: center;
+      justify-content: center;
+    `}
 `;
 
 const Label = styled.label`
@@ -16,9 +23,9 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function FormRowVertical({ label, error, children }) {
+function FormRowVertical({ label, error, type, children }) {
   return (
-    <StyledFormRow>
+    <StyledFormRow type={type}>
       {label && <Label htmlFor={children.props.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}

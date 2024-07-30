@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 import Button from "../../ui/Button";
 import Form from "../../ui/Form";
@@ -10,21 +11,23 @@ import SpinnerMini from "../../ui/SpinnerMini";
 import { useLogin } from "./useLogin";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("rmnsrgvsh@gmail.com");
+  const [password, setPassword] = useState("12121212");
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const { login, isPending } = useLogin();
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!email || !password) return;
+    if (!email || !password || !captchaToken) return;
     login(
-      { email, password },
+      { email, password, captchaToken },
       {
         onSettled: () => {
           setEmail("");
           setPassword("");
+          setCaptchaToken("");
         },
       }
     );
@@ -51,6 +54,12 @@ function LoginForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={isPending}
+        />
+      </FormRowVertical>
+      <FormRowVertical type="center">
+        <Turnstile
+          siteKey={import.meta.env.VITE_CAPTCHA_SITE_KEY}
+          onSuccess={(token) => setCaptchaToken(token)}
         />
       </FormRowVertical>
       <FormRowVertical>

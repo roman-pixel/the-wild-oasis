@@ -17,10 +17,11 @@ export async function signup({ fullName, email, password }) {
   return data;
 }
 
-export async function login({ email, password }) {
+export async function login({ email, password, captchaToken }) {
   let { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
+    options: { captchaToken },
   });
 
   if (error) throw new Error(error.message);
