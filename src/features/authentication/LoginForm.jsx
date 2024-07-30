@@ -12,7 +12,7 @@ import { useLogin } from "./useLogin";
 
 function LoginForm() {
   const [email, setEmail] = useState("rmnsrgvsh@gmail.com");
-  const [password, setPassword] = useState("12121212");
+  const [password, setPassword] = useState("");
   const [captchaToken, setCaptchaToken] = useState("");
 
   const { login, isPending } = useLogin();
