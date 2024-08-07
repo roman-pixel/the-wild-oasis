@@ -56,7 +56,7 @@
 
 Вы можете увидеть демо-версию приложения по следующей ссылке:
 
-[Демо-приложение](https://668bc61327123c00796a5200--the-wild-oasis-roman-pixel.netlify.app/login)
+[Демо-приложение](https://the-wild-oasis-roman-pixel.netlify.app/login)
 
 
 ## Установка
