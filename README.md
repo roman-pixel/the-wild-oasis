@@ -61,17 +61,49 @@
 
 ## Установка
 
+
 1. Клонируйте репозиторий:
-```bash
-git clone https://github.com/roman-pixel/the-wild-oasis.git
-```
+  ```bash
+  git clone https://github.com/roman-pixel/the-wild-oasis.git
+  ```
 
 2.	Перейдите в каталог проекта
+
+3.	Создайте файлы переменных окружения:
+  Для Linux и MacOS
+  ```bash
+  touch .env .env.development .env.production 
+  ```
+  Для Windows
+  ```bash
+  echo. > .env.development
+  echo. > .env.production
+  echo. > .env
+  ```
+
+4.	Настройте переменные окружения:
+  В .env
+  ```bash
+  VITE_SUPABASE_URL=<your-supabase-url>
+  VITE_SUPABASE_KEY=<your-supabase-key>
+  VITE_CAPTCHA_SITE_KEY=<your-recaptcha-site-key>
+  ```
+  
+  В .env.development добавьте:
+  ```bash
+  VITE_APP_ENV=development
+  ```
+  
+  .env.production добавьте:
+  ```bash
+  VITE_APP_ENV=production
+  ```
    
-4.	Установите зависимости с помощью Yarn:
- ```bash
- npm install
- ```
-4. Запустите приложение 
-```bash
-npm run dev
+5.	Установите зависимости с помощью npm:
+  ```bash
+  npm install
+  ```
+6.  Запустите приложение 
+  ```bash
+  npm run dev
+  ```
