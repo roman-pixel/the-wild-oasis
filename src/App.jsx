@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
-import GlobalStyles from "./styles/ClobalStyles";
+import GlobalStyles from "./styles/GlobalStyles";
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings";
 import Cabins from "./pages/Cabins";
