@@ -29,8 +29,14 @@ export async function login({ email, password, captchaToken }) {
   return data;
 }
 
-export async function recovery({ email }) {
-  let { data, error } = await supabase.auth.resetPasswordForEmail(email);
+export async function recovery({ email, captchaToken }) {
+  console.log(captchaToken);
+  let { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    captchaToken,
+  });
+
+  console.log(data);
+  console.log(error);
 
   if (error) throw new Error(error.message);
 

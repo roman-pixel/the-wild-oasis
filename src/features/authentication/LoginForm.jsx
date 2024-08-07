@@ -67,13 +67,13 @@ function LoginForm() {
           {!isPending ? "Login" : <SpinnerMini />}
         </Button>
       </FormRowVertical>
-      <FormRowVertical>
+      {/* <FormRowVertical>
         {!isPending && (
           <Button size="medium" $variation="inline" as={Link} to={"recovery"}>
             Forgot your password?
           </Button>
         )}
-      </FormRowVertical>
+      </FormRowVertical> */}
     </Form>
   );
 }

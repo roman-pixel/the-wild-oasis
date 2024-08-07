@@ -8,7 +8,8 @@ export function useRecovery() {
   const navigate = useNavigate();
 
   const { mutate: recovery, isPending } = useMutation({
-    mutationFn: ({ email }) => recoveryApi({ email }),
+    mutationFn: ({ email, captchaToken }) =>
+      recoveryApi({ email, captchaToken }),
     onSuccess: () => {
       toast.success("Check your email to reset your password");
       navigate("/login", { replace: true });

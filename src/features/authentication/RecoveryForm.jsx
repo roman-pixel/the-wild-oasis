@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 import Button from "../../ui/Button";
 import Form from "../../ui/Form";
@@ -11,18 +12,20 @@ import { useRecovery } from "./useRecovery";
 
 function RecoveryForm() {
   const [email, setEmail] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const { recovery, isPending } = useRecovery();
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!email) return;
+    if (!email || !captchaToken) return;
     recovery(
-      { email },
+      { email, captchaToken },
       {
         onSettled: () => {
           setEmail("");
+          // setCaptchaToken("");
         },
       }
     );
@@ -39,6 +42,12 @@ function RecoveryForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isPending}
+        />
+      </FormRowVertical>
+      <FormRowVertical type="center">
+        <Turnstile
+          siteKey={import.meta.env.VITE_CAPTCHA_SITE_KEY}
+          onSuccess={(token) => setCaptchaToken(token)}
         />
       </FormRowVertical>
       <FormRowVertical>
